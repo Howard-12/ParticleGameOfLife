@@ -2,7 +2,7 @@ project "ParticleGameOfLife"
    kind "ConsoleApp"
    language "C++"
    cppdialect "C++17"
-   --staticruntime "on"
+   staticruntime "off"
 
    targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
    objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -13,8 +13,23 @@ project "ParticleGameOfLife"
       "src/**.cpp"
    }
 
-   includedirs {
-      "vendor/SFML"
+   includedirs 
+   {
+      "vendor/SFML1/include"
+   }
+   
+   links 
+   {
+      --"vendor/SFML/lib/**.lib"
+      "vendor/SFML1/lib/sfml-graphics-d.lib", 
+      "vendor/SFML1/lib/sfml-window-d.lib",
+      "vendor/SFML1/lib/sfml-system-d.lib",
+      "vendor/SFML1/bin/sfml-graphics-d-2.dll"
+   }
+
+   defines 
+   {
+
    }
 
    filter "system:windows"

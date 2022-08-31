@@ -1,3 +1,3 @@
-namespace P {
+namespace Game {
 
 }
