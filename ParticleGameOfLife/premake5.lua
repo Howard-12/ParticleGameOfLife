@@ -23,8 +23,8 @@ project "ParticleGameOfLife"
       --"vendor/SFML/lib/**.lib"
       "vendor/SFML1/lib/sfml-graphics-d.lib", 
       "vendor/SFML1/lib/sfml-window-d.lib",
-      "vendor/SFML1/lib/sfml-system-d.lib",
-      "vendor/SFML1/bin/sfml-graphics-d-2.dll"
+      "vendor/SFML1/lib/sfml-system-d.lib"
+      --"vendor/SFML1/bin/sfml-graphics-d-2.dll"
    }
 
    defines 
