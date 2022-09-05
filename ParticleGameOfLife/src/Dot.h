@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-class Dot : public sf::CircleShape
+class Dot
 {
 public:
     Dot(float xpos, float ypos, sf::Color colour);
@@ -10,9 +10,10 @@ public:
 
     float x;
     float y;
-    float size = 10.f;
-    float speed = 5.f;
+    float vx = 0;
+    float vy = 0;
+    const float size = 3.f;
     sf::CircleShape shape;
-    void update(float deltaTime);
+    //void update(float deltaTime);
     void draw(sf::RenderWindow *window);
 };

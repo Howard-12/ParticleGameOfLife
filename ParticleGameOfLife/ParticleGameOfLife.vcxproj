@@ -89,7 +89,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>vendor\SFML1\lib\sfml-graphics-d.lib;vendor\SFML1\lib\sfml-window-d.lib;vendor\SFML1\lib\sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>vendor\SFML1\lib\sfml-graphics.lib;vendor\SFML1\lib\sfml-window.lib;vendor\SFML1\lib\sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

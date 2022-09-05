@@ -1,33 +1,77 @@
 #include <iostream>
+#include <vector>
+#include <math.h>
 
 #include "Dot.h"
 
+std::vector<Dot> green;
+std::vector<Dot> red;
+std::vector<Dot> yellow;
+
+float random(const int min, const unsigned int &max) { return std::rand() % (max - min) + min; }
+
+void interact(std::vector<Dot>& group1, std::vector<Dot>& group2, float g, float deltaTime, const unsigned int winWidth, const unsigned int winHeight)
+{
+    for (auto &g1 : group1)
+    {
+        float fx = 0;
+        float fy = 0;
+        for (const auto &g2 : group2)
+        {
+            const float dx = g1.x - g2.x;
+            const float dy = g1.y - g2.y;
+            const float ds = dx * dx + dy * dy;
+            const float d = std::sqrt(ds);
+            if (d > 0 && d < 100)
+            {
+                float F = g / d;
+                fx += F * dx;
+                fy += F * dy;
+            }
+        }
+        g1.vx = (g1.vx + fx) * 0.1f;
+        g1.vy = (g1.vy + fy) * 0.1f;
+        g1.x += g1.vx * deltaTime;
+        g1.y += g1.vy * deltaTime;
+
+        //if (g1.x <= 0 || g1.x >= sf::VideoMode::getDesktopMode().width)
+        //    g1.vx *= -1;
+        //if (g1.y <= 0 || g1.y >= sf::VideoMode::getDesktopMode().height)
+        //    g1.vy *= -1;
+        if (g1.x < -6)
+            g1.x += ((float)winWidth + 6.f);
+        if (g1.x > winWidth)
+            g1.x -= ((float)winWidth + 6.f);
+        if (g1.y < -6)
+            g1.y += ((float)winHeight + 6.f);
+        if (g1.y > winHeight)
+            g1.y -= ((float)winHeight + 6.f);
+    }
+}
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
+    std::srand(std::time(0));
+    const unsigned int winWidth = sf::VideoMode::getDesktopMode().width;
+    const unsigned int winHeight = sf::VideoMode::getDesktopMode().height;
+    sf::RenderWindow window(sf::VideoMode(winWidth, winHeight), "Particle Game of Life", sf::Style::Fullscreen);
     window.setFramerateLimit(0);
-
-    std::unique_ptr<Dot> dot = std::make_unique<Dot>(100.f, 300.f, sf::Color::Green);
-    
-    float speed = 10.0f;
-    float cx = 100.0f;
-    float cy = 100.0f;
-    sf::CircleShape shape(10.f);
-    sf::Color colour = sf::Color::Green;
-    shape.setFillColor(colour);
-
-    float speed1 = 1.0f;
-    float cx1 = 100.0f;
-    float cy1 = 200.0f;
-    sf::CircleShape shape1(10.f);
-    shape1.setFillColor(sf::Color::Green);
-
     sf::Clock clock;
+
+    // Create dots
+    for (int i = 0; i < 1000; ++i)
+    {
+        green.push_back(Dot(random(50, winWidth), random(50, winHeight), sf::Color::Green));
+        red.push_back(Dot(random(50, winWidth), random(50, winHeight), sf::Color::Red));
+        yellow.push_back(Dot(random(50, winWidth), random(50, winHeight), sf::Color::Yellow));
+    }
+
+    // Main loop
     while (window.isOpen())
     {   
         sf::Time elapsed = clock.restart();
-        float deltaTime = (float)elapsed.asMicroseconds() / 10000;
-        //std::cout << (float)deltaTime << "\n";
+        float deltaTime = (float)elapsed.asMicroseconds() / 10000.f;
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -35,28 +79,35 @@ int main()
                 window.close();
         }
 
+        // Clear window
         window.clear();
 
-        dot->update(deltaTime);
+        // Updates     
+        interact(green, green, -0.32, deltaTime, winWidth, winHeight);
+        interact(green, red, -0.18, deltaTime, winWidth, winHeight);
+        interact(green, yellow, 0.34, deltaTime, winWidth, winHeight);
+        interact(red, red, -0.10, deltaTime, winWidth, winHeight);
+        interact(red, green, -0.34, deltaTime, winWidth, winHeight);
+        interact(yellow, yellow, 0.15, deltaTime, winWidth, winHeight);
+        interact(yellow, green, -0.20, deltaTime, winWidth, winHeight);
 
-        if (shape.getPosition().x >= 475 || shape.getPosition().x <= 0)
+        for (auto &g : green)
         {
-            speed *= -1;
+            g.draw(&window);
         }
-        if (shape1.getPosition().x >= 475 || shape1.getPosition().x <= 0)
+
+        for (auto &r : red)
         {
-            speed1 *= -1;
+            r.draw(&window);
         }
-        cx += speed * deltaTime;
-        cx1 += speed1 * deltaTime;
-        shape.setPosition(cx, cy);
-        shape1.setPosition(cx1, cy1);
-        window.draw(shape);
-        window.draw(shape1);
-        dot->draw(&window);
+
+        for (auto& y : yellow)
+        {
+            y.draw(&window);
+        }
+
+        // Display
         window.display();
-
-
     }
 
     return 0;
