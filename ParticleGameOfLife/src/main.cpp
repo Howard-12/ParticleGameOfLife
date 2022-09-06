@@ -53,7 +53,6 @@ void interact(std::vector<Dot>& group1, std::vector<Dot>& group2, float g, float
 int main()
 {
     auto game = std::make_unique< Game::Game>();
-    /*ImGui::SFML::Init(game->window);*/
 
     // Create dots
     for (int i = 0; i < 1200; ++i)
@@ -70,20 +69,8 @@ int main()
         game->start();
         game->events();
 
-        //sf::Clock dt;
-        //sf::Event event;
-        //while (game->window.pollEvent(event))
-        //{
-        //    ImGui::SFML::ProcessEvent(game->window, event);
-
-        //}
-        //ImGui::SFML::Update(game->window, dt.restart());
-
-        //ImGui::Begin("Yeah");
-        //ImGui::Button("Look");
-        //ImGui::End();
-
         game->drawGUI();
+
         // Clear window
         game->clear();
 
