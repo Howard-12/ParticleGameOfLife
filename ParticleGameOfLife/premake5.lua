@@ -15,7 +15,9 @@ project "ParticleGameOfLife"
 
    includedirs 
    {
-      "vendor/SFML1/include"
+      "vendor/SFML1/include",
+      "vendor/ImGui/",
+      "vendor/ImGui-sfml"
    }
 
    defines 
@@ -34,7 +36,8 @@ project "ParticleGameOfLife"
       {
         "vendor/SFML1/lib/sfml-graphics-d.lib", 
         "vendor/SFML1/lib/sfml-window-d.lib",
-        "vendor/SFML1/lib/sfml-system-d.lib"
+        "vendor/SFML1/lib/sfml-system-d.lib",
+        "opengl32.lib"
       }
 
    filter "configurations:Release"
@@ -46,5 +49,6 @@ project "ParticleGameOfLife"
       {
           "vendor/SFML1/lib/sfml-graphics.lib", 
           "vendor/SFML1/lib/sfml-window.lib",
-          "vendor/SFML1/lib/sfml-system.lib"
+          "vendor/SFML1/lib/sfml-system.lib",
+          "opengl32.lib"
       }

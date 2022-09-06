@@ -3,6 +3,7 @@
 #include <math.h>
 
 #include "Dot.h"
+#include "Game.h"
 
 std::vector<Dot> green;
 std::vector<Dot> red;
@@ -22,7 +23,7 @@ void interact(std::vector<Dot>& group1, std::vector<Dot>& group2, float g, float
             const float dy = g1.y - g2.y;
             const float ds = dx * dx + dy * dy;
             const float d = std::sqrt(ds);
-            if (d > 0 && d < 100)
+            if (d > 0 && d < 90)
             {
                 float F = g / d;
                 fx += F * dx;
@@ -51,63 +52,67 @@ void interact(std::vector<Dot>& group1, std::vector<Dot>& group2, float g, float
 
 int main()
 {
-    std::srand(std::time(0));
-    const unsigned int winWidth = sf::VideoMode::getDesktopMode().width;
-    const unsigned int winHeight = sf::VideoMode::getDesktopMode().height;
-    sf::RenderWindow window(sf::VideoMode(winWidth, winHeight), "Particle Game of Life", sf::Style::Fullscreen);
-    window.setFramerateLimit(0);
-    sf::Clock clock;
+    auto game = std::make_unique< Game::Game>();
+    /*ImGui::SFML::Init(game->window);*/
 
     // Create dots
-    for (int i = 0; i < 1000; ++i)
+    for (int i = 0; i < 1200; ++i)
     {
-        green.push_back(Dot(random(50, winWidth), random(50, winHeight), sf::Color::Green));
-        red.push_back(Dot(random(50, winWidth), random(50, winHeight), sf::Color::Red));
-        yellow.push_back(Dot(random(50, winWidth), random(50, winHeight), sf::Color::Yellow));
+        green.push_back(Dot(random(50, game->winWidth), random(50, game->winHeight), sf::Color::Green));
+        red.push_back(Dot(random(50, game->winWidth), random(50, game->winHeight), sf::Color::Red));
+        yellow.push_back(Dot(random(50, game->winWidth), random(50, game->winHeight), sf::Color::Yellow));
+
     }
 
     // Main loop
-    while (window.isOpen())
-    {   
-        sf::Time elapsed = clock.restart();
-        float deltaTime = (float)elapsed.asMicroseconds() / 10000.f;
+    while (game->window.isOpen())
+    {     
+        game->start();
+        game->events();
 
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        //sf::Clock dt;
+        //sf::Event event;
+        //while (game->window.pollEvent(event))
+        //{
+        //    ImGui::SFML::ProcessEvent(game->window, event);
 
+        //}
+        //ImGui::SFML::Update(game->window, dt.restart());
+
+        //ImGui::Begin("Yeah");
+        //ImGui::Button("Look");
+        //ImGui::End();
+
+        game->drawGUI();
         // Clear window
-        window.clear();
+        game->clear();
 
         // Updates     
-        interact(green, green, -0.32, deltaTime, winWidth, winHeight);
-        interact(green, red, -0.18, deltaTime, winWidth, winHeight);
-        interact(green, yellow, 0.34, deltaTime, winWidth, winHeight);
-        interact(red, red, -0.10, deltaTime, winWidth, winHeight);
-        interact(red, green, -0.34, deltaTime, winWidth, winHeight);
-        interact(yellow, yellow, 0.15, deltaTime, winWidth, winHeight);
-        interact(yellow, green, -0.20, deltaTime, winWidth, winHeight);
+        interact(green, green, -0.32, game->getDeltaTime(), game->winWidth, game->winHeight);
+        interact(green, red, -0.18, game->getDeltaTime(), game->winWidth, game->winHeight);
+        interact(green, yellow, 0.34, game->getDeltaTime(), game->winWidth, game->winHeight);
+        interact(red, red, -0.10, game->getDeltaTime(), game->winWidth, game->winHeight);
+        interact(red, green, -0.34, game->getDeltaTime(), game->winWidth, game->winHeight);
+        interact(yellow, yellow, 0.15, game->getDeltaTime(), game->winWidth, game->winHeight);
+        interact(yellow, green, -0.20, game->getDeltaTime(), game->winWidth, game->winHeight);
 
         for (auto &g : green)
         {
-            g.draw(&window);
+            g.draw(game->window);
         }
 
         for (auto &r : red)
         {
-            r.draw(&window);
+            r.draw(game->window);
         }
 
         for (auto& y : yellow)
         {
-            y.draw(&window);
+            y.draw(game->window);
         }
 
         // Display
-        window.display();
+        game->display();
     }
 
     return 0;

@@ -1,8 +1,7 @@
 #include "Dot.h"
 
-Dot::Dot(float xpos, float ypos, sf::Color colour) {
-	x = xpos;
-	y = ypos;
+Dot::Dot(float xpos, float ypos, sf::Color colour) : x(xpos), y(ypos) 
+{
 	shape.setRadius(size);
 	shape.setFillColor(colour);
 	shape.setPosition(x, y);
@@ -13,13 +12,8 @@ Dot::~Dot()
 
 }
 
-//void Dot::update(float deltaTime)
-//{
-//	
-//}
-
-void Dot::draw(sf::RenderWindow *window)
+void Dot::draw(sf::RenderWindow &window)
 {
 	shape.setPosition(x, y);
-	window->draw(shape);
+	window.draw(shape);
 }

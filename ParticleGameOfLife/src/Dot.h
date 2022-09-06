@@ -1,4 +1,3 @@
-#pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
@@ -14,6 +13,5 @@ public:
     float vy = 0;
     const float size = 3.f;
     sf::CircleShape shape;
-    //void update(float deltaTime);
-    void draw(sf::RenderWindow *window);
+    void draw(sf::RenderWindow &window);
 };

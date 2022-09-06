@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="backends">
+      <UniqueIdentifier>{00057006-ECD1-CA11-15EB-B8B9011700A0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples">
+      <UniqueIdentifier>{84D830B1-70A5-8BBC-99BE-796485EAC04A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\example_allegro5">
+      <UniqueIdentifier>{994063B8-0503-9742-4EB3-25CFBAB46F20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\libs">
+      <UniqueIdentifier>{5D4FF000-C90F-6C37-924A-B5B4FEC9B013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\libs\glfw">
+      <UniqueIdentifier>{3C45F63A-2829-B790-9189-B1E37D8CA112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\libs\glfw\include">
+      <UniqueIdentifier>{AFE822A3-9BF8-CE73-04B2-3392F0E0BD0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\libs\glfw\include\GLFW">
+      <UniqueIdentifier>{4E69E5B0-BA4C-F4F0-C34F-222D2FB2BA41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\libs\usynergy">
+      <UniqueIdentifier>{324D28DD-1E47-512F-07B4-E73FF34CB79B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc">
+      <UniqueIdentifier>{B1A29A7C-9DD9-9B0D-46C6-811032DC170F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\cpp">
+      <UniqueIdentifier>{030DBAB9-EFD9-14C5-18F3-026D041F4A53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\freetype">
+      <UniqueIdentifier>{84388084-F0F8-FBBA-B933-453825B34097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\single_file">
+      <UniqueIdentifier>{21FD0C4E-0DF6-2BA0-3628-112522800BAC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="backends\imgui_impl_allegro5.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_android.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_dx10.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_dx11.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_dx12.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_dx9.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_glfw.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_glut.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_metal.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_opengl2.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_opengl3.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_opengl3_loader.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_osx.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_sdl.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_sdlrenderer.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_vulkan.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_wgpu.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="backends\imgui_impl_win32.h">
+      <Filter>backends</Filter>
+    </ClInclude>
+    <ClInclude Include="examples\example_allegro5\imconfig_allegro5.h">
+      <Filter>examples\example_allegro5</Filter>
+    </ClInclude>
+    <ClInclude Include="examples\libs\glfw\include\GLFW\glfw3.h">
+      <Filter>examples\libs\glfw\include\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="examples\libs\glfw\include\GLFW\glfw3native.h">
+      <Filter>examples\libs\glfw\include\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="examples\libs\usynergy\uSynergy.h">
+      <Filter>examples\libs\usynergy</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_glfw.h" />
+    <ClInclude Include="imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
+    <ClInclude Include="misc\cpp\imgui_stdlib.h">
+      <Filter>misc\cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="misc\freetype\imgui_freetype.h">
+      <Filter>misc\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="misc\single_file\imgui_single_file.h">
+      <Filter>misc\single_file</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_demo.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_tables.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
+  </ItemGroup>
+</Project>
