@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <immintrin.h>
 
 #include "Dot.h"
 #include "Game.h"
@@ -10,6 +11,13 @@ std::vector<Dot> red;
 std::vector<Dot> yellow;
 
 float random(const int min, const unsigned int &max) { return std::rand() % (max - min) + min; }
+float fast_rsqrt(float x) {
+    return _mm_cvtss_f32(_mm_rsqrt_ss(_mm_set_ss(x)));
+}
+
+float fast_sqrt(float x) {
+    return x * fast_rsqrt(x);
+}
 
 void interact(std::vector<Dot>& group1, std::vector<Dot>& group2, float g, float deltaTime, const unsigned int winWidth, const unsigned int winHeight)
 {
@@ -22,8 +30,8 @@ void interact(std::vector<Dot>& group1, std::vector<Dot>& group2, float g, float
             const float dx = g1.x - g2.x;
             const float dy = g1.y - g2.y;
             const float ds = dx * dx + dy * dy;
-            const float d = std::sqrt(ds);
-            if (d > 0 && d < 90)
+            const float d = fast_sqrt(ds);
+            if (d > 0 && d < 100)
             {
                 float F = g / d;
                 fx += F * dx;
@@ -55,7 +63,7 @@ int main()
     auto game = std::make_unique< Game::Game>();
 
     // Create dots
-    for (int i = 0; i < 1200; ++i)
+    for (int i = 0; i < 1500; ++i)
     {
         green.push_back(Dot(random(50, game->winWidth), random(50, game->winHeight), sf::Color::Green));
         red.push_back(Dot(random(50, game->winWidth), random(50, game->winHeight), sf::Color::Red));
@@ -75,14 +83,21 @@ int main()
         game->clear();
 
         // Updates     
-        interact(green, green, -0.32, game->getDeltaTime(), game->winWidth, game->winHeight);
-        interact(green, red, -0.18, game->getDeltaTime(), game->winWidth, game->winHeight);
-        interact(green, yellow, 0.34, game->getDeltaTime(), game->winWidth, game->winHeight);
+        //interact(green, green, -0.32, game->getDeltaTime(), game->winWidth, game->winHeight);
+        //interact(green, red, -0.18, game->getDeltaTime(), game->winWidth, game->winHeight);
+        //interact(green, yellow, 0.34, game->getDeltaTime(), game->winWidth, game->winHeight);
+        //interact(red, red, -0.10, game->getDeltaTime(), game->winWidth, game->winHeight);
+        //interact(red, green, -0.34, game->getDeltaTime(), game->winWidth, game->winHeight);
+        //interact(yellow, yellow, 0.15, game->getDeltaTime(), game->winWidth, game->winHeight);
+        //interact(yellow, green, -0.20, game->getDeltaTime(), game->winWidth, game->winHeight);
+
+        interact(green, green, -0.5, game->getDeltaTime(), game->winWidth, game->winHeight);
+        interact(green, red, 0.18, game->getDeltaTime(), game->winWidth, game->winHeight);
+        interact(green, yellow, -0.34, game->getDeltaTime(), game->winWidth, game->winHeight);
         interact(red, red, -0.10, game->getDeltaTime(), game->winWidth, game->winHeight);
         interact(red, green, -0.34, game->getDeltaTime(), game->winWidth, game->winHeight);
         interact(yellow, yellow, 0.15, game->getDeltaTime(), game->winWidth, game->winHeight);
         interact(yellow, green, -0.20, game->getDeltaTime(), game->winWidth, game->winHeight);
-
         for (auto &g : green)
         {
             g.draw(game->window);
