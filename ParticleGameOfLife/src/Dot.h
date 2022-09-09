@@ -14,4 +14,5 @@ public:
     const float size = 3.f;
     sf::CircleShape shape;
     void draw(sf::RenderWindow &window);
+
 };

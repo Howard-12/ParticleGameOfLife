@@ -96,6 +96,7 @@
     <ClInclude Include="src\Dot.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\main.h" />
+    <ClInclude Include="src\View.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dot.cpp" />
